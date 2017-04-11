@@ -14,12 +14,11 @@
             * ${errorMap.name}
         </span>
 </div>
-<form action="DepSave" method="post">
+<form action="depSave" method="post">
     <div>
         <label>
-            <input type="text" name="DepName" pattern="[A-Za-z]{3,}" value="<c:out value="${param['DepName'] eq null ? department.name : param['DepName']}"/>"/>
-            <input type="hidden" name="DepID" value="${depId}"/>
-
+            <input type="text" name="name" pattern="[A-Za-z]{3,}" value="<c:out value="${param['DepName'] eq null ? department.name : param['DepName']}"/>"/>
+            <input type="hidden" name="id" value="${depId}"/>
         </label>
     </div>
     <div>

@@ -4,10 +4,12 @@ package com.aimprosoft.controller;
 import com.aimprosoft.exeption.ValidateExp;
 import com.aimprosoft.model.Department;
 import com.aimprosoft.service.DepartmentService;
+import com.aimprosoft.util.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class Departments {
         try {
             department = departmentService.getDepartmentById(depId);
             model.addAttribute("department",department);
+            model.addAttribute("depId",depId);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,24 +46,33 @@ public class Departments {
 
         return "editDep";
     }
-    @RequestMapping(value = "/depDelete?{depId}", method=RequestMethod.POST)
-    public String depDelete(@PathVariable Long depId, Model model){
-        Department department ;
+
+    @RequestMapping(value = "/addDepartment", method=RequestMethod.GET)
+    public String addDepartment(Model model){
+            model.addAttribute("depID", null);
+        return "editDep";
+    }
+
+    @RequestMapping(value = "/depDelete", method=RequestMethod.POST)
+    public String depDelete(@RequestParam("depID") long depId){
         try {
-            department = departmentService.getDepartmentById(depId);
+            departmentService.getDepartmentById(depId);
             departmentService.deleteDepartment(depId);
-            model.addAttribute("department",department);
             return "redirect:/";
         } catch (SQLException e) {
             return "sqlException";
         }
 
     }
-    @RequestMapping(value = " /depSave", method=RequestMethod.POST)
-    public String depSave(@PathVariable long depId,@PathVariable String depName, Model model){
-        Department department = new Department();
-        department.setName(depName);
+    @RequestMapping(value = "/depSave", method=RequestMethod.POST)
+    public String depSave(Department department, Model model){
 
+        /*Department department = new Department();
+        Long ldepID = FormatUtils.getLongFromStr(depID);*/
+//        department.setName(depName);
+       /* if (department.getId() != null) {
+            department.setId(ldepID);
+        }*/
         try {
             departmentService.saveOrUpdateDepartment(department);
             model.addAttribute("department",department);
@@ -68,10 +80,10 @@ public class Departments {
         } catch (SQLException e) {
             return "sqlException";
         } catch (ValidateExp exp) {
-           model.addAttribute("depId",depId);
+           //model.addAttribute("depId",depID);
            model.addAttribute("errorMap",exp.getErrorMap());
            return "editDep";
         }
     }
-
 }
+

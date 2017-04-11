@@ -4,6 +4,7 @@ import com.aimprosoft.dao.DepartmentDAO;
 import com.aimprosoft.model.Department;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,9 +21,9 @@ public class DepHibernateDAOImpl implements DepartmentDAO<Department> {
     private SessionFactory sessionFactory;
 
     @Override
-    public void delete(Long longId) throws SQLException {
+    public void delete(Department department) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(longId);
+        session.delete(department);
     }
 
     @Override
@@ -41,14 +42,16 @@ public class DepHibernateDAOImpl implements DepartmentDAO<Department> {
     public Department getByID(Long s) throws SQLException {
         Long depId = Long.valueOf(s);
         Session session = sessionFactory.getCurrentSession();
-        return (Department) session.get(Department.class, depId);
+        return  session.get(Department.class, depId);
     }
 
     @Override
     public Department existNameInDB(String depName) throws SQLException {
-        return (Department) sessionFactory.getCurrentSession()
-                .createQuery(GET_DEP_BY_NAME)
-                .setParameter("name", depName);
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.
+                createQuery(GET_DEP_BY_NAME);
+        query.setParameter("name", depName);
+        return (Department) query.uniqueResult();
     }
 
 }

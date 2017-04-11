@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DepartmentDAO<T> {
 
-    void delete(Long longId) throws SQLException;
+    void delete(Department department) throws SQLException;
 
     void update(T entity) throws SQLException;
 

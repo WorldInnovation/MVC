@@ -22,7 +22,7 @@ public class ExceptionHandlingController {
     @ExceptionHandler({SQLException.class,DataAccessException.class})
     public String databaseError() {
 
-        return "databaseError";
+        return "sqlException";
     }
 
 /*    // Total control - setup a model and return the view name yourself. Or

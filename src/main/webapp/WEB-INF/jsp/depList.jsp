@@ -11,10 +11,10 @@
 <body>
 
 <div >
-    <span class="titleTable"> Departments Hello</span>
+    <span class="titleTable"> Departments hi</span>
 </div>
 
-<form action="editDepartment" method="get">
+<form action="addDepartment" method="get">
     <input type="submit" value="New Department">  </form>
 <table >
     <caption >
@@ -43,7 +43,7 @@
             <input type="submit" value="Edit">  </form>
         </td>
 
-        <td> <form  action="DepDelete" method="post">
+        <td> <form  action="depDelete" method="post">
             <input type="hidden" name="depID" value="${dep.id}" >
             <input  type="submit"  value="Delete">  </form>
         </td>
