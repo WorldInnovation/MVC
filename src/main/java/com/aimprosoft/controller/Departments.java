@@ -31,10 +31,12 @@ public class Departments {
     }
 
     @RequestMapping(value = "/editDepartment", method=RequestMethod.GET)
-    @ResponseBody
-    public String editDepartment(@RequestParam("depID") long depId){
+    public String editDepartment(@RequestParam("depID") long depId,Model model){
+        Department department;
         try {
-            departmentService.getDepartmentById(depId);
+            department = departmentService.getDepartmentById(depId);
+            model.addAttribute("department",department);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,8 +56,8 @@ public class Departments {
         }
 
     }
-    @RequestMapping(value = " /depSave/", method=RequestMethod.POST)
-    public String depSave(@PathVariable String depId,@PathVariable String depName, Model model){
+    @RequestMapping(value = " /depSave", method=RequestMethod.POST)
+    public String depSave(@PathVariable long depId,@PathVariable String depName, Model model){
         Department department = new Department();
         department.setName(depName);
 
