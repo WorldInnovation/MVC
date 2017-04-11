@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface DepartmentDAO<T> {
 
-    void delete(T entity) throws SQLException;
+    void delete(Long longId) throws SQLException;
 
     void update(T entity) throws SQLException;
 
     List<T> getAll() throws SQLException;
 
-    Department getByID(String id) throws SQLException;
+    Department getByID(Long id) throws SQLException;
 
     Department existNameInDB(String name) throws SQLException;
 }

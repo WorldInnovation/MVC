@@ -32,13 +32,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Transactional
     @Override
-    public void deleteDepartment(Department department) throws SQLException {
-        departmentDAO.delete(department);
+    public void deleteDepartment(Long longId) throws SQLException {
+        departmentDAO.delete(longId);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Department getDepartmentById(String depId) throws SQLException {
+    public Department getDepartmentById(Long depId) throws SQLException {
         return departmentDAO.getByID(depId);
     }
 

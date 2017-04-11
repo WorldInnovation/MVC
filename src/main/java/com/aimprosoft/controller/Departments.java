@@ -6,9 +6,7 @@ import com.aimprosoft.model.Department;
 import com.aimprosoft.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,24 +30,23 @@ public class Departments {
         return "depList";
     }
 
-    @RequestMapping(value = " /editDepartment/{depId}", method=RequestMethod.GET)
-    public String editDepartment(@PathVariable String depId, Model model){
-        Department department ;
+    @RequestMapping(value = "/editDepartment", method=RequestMethod.GET)
+    @ResponseBody
+    public String editDepartment(@RequestParam("depID") long depId){
         try {
-            department = departmentService.getDepartmentById(depId);
-            model.addAttribute("department",department);
+            departmentService.getDepartmentById(depId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return "editDep";
     }
-    @RequestMapping(value = " /depDelete/{depId}", method=RequestMethod.POST)
-    public String depDelete(@PathVariable String depId, Model model){
+    @RequestMapping(value = "/depDelete?{depId}", method=RequestMethod.POST)
+    public String depDelete(@PathVariable Long depId, Model model){
         Department department ;
         try {
             department = departmentService.getDepartmentById(depId);
-            departmentService.deleteDepartment(department);
+            departmentService.deleteDepartment(depId);
             model.addAttribute("department",department);
             return "redirect:/";
         } catch (SQLException e) {

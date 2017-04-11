@@ -5,16 +5,16 @@
 <html>
 <head>
 
-    <title> Departments </title>
+    <title> Departments</title>
 </head>
 
 <body>
 
 <div >
-    <span class="titleTable"> Departments </span>
+    <span class="titleTable"> Departments Hello</span>
 </div>
 
-<form action="EditDepartment" method="get">
+<form action="editDepartment" method="get">
     <input type="submit" value="New Department">  </form>
 <table >
     <caption >
@@ -33,18 +33,18 @@
         <td >${dep.id}</td>
         <td>${dep.name}</td>
         <td> <form action="EmployeesList" method="get">
-            <input type="hidden" name="DepID" value="${dep.id}" >
+            <input type="hidden" name="depID" value="${dep.id}" >
             <input type="submit" value="Select">
         </form>
         </td>
 
-        <td>    <form action="EditDepartment" method="get">
-            <input type="hidden" name="DepID" value="${dep.id}" >
+        <td>    <form action="editDepartment" method="get">
+            <input type="hidden" name="depID" value="${dep.id}" >
             <input type="submit" value="Edit">  </form>
         </td>
 
         <td> <form  action="DepDelete" method="post">
-            <input type="hidden" name="DepID" value="${dep.id}" >
+            <input type="hidden" name="depID" value="${dep.id}" >
             <input  type="submit"  value="Delete">  </form>
         </td>
 

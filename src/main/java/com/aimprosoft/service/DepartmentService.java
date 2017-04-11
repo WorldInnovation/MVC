@@ -10,6 +10,6 @@ public interface DepartmentService {
 
     List <Department> getAll () throws  SQLException;
     void saveOrUpdateDepartment(Department department) throws ValidateExp, SQLException;
-    void deleteDepartment (Department department) throws  SQLException;
-    Department getDepartmentById(String depId) throws SQLException;
+    void deleteDepartment (Long longId) throws  SQLException;
+    Department getDepartmentById(Long depId) throws SQLException;
 }

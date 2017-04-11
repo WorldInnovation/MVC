@@ -20,9 +20,9 @@ public class DepHibernateDAOImpl implements DepartmentDAO<Department> {
     private SessionFactory sessionFactory;
 
     @Override
-    public void delete(Department entity) throws SQLException {
+    public void delete(Long longId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(entity);
+        session.delete(longId);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class DepHibernateDAOImpl implements DepartmentDAO<Department> {
     }
 
     @Override
-    public Department getByID(String s) throws SQLException {
+    public Department getByID(Long s) throws SQLException {
         Long depId = Long.valueOf(s);
         Session session = sessionFactory.getCurrentSession();
         return (Department) session.get(Department.class, depId);
