@@ -28,22 +28,19 @@ public class Departments {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return "depList";
     }
 
     @RequestMapping(value = "/editDepartment", method=RequestMethod.GET)
-    public String editDepartment(@RequestParam("depID") long depId,Model model){
+    public String editDepartment(@RequestParam(required = false) Long depID,Model model){
         Department department;
         try {
-            department = departmentService.getDepartmentById(depId);
+            department = departmentService.getDepartmentById(depID);
             model.addAttribute("department",department);
-            model.addAttribute("depId",depId);
-
+            model.addAttribute("depId",depID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return "editDep";
     }
 
@@ -54,7 +51,7 @@ public class Departments {
     }
 
     @RequestMapping(value = "/depDelete", method=RequestMethod.POST)
-    public String depDelete(@RequestParam("depID") long depId){
+    public String depDelete(@RequestParam("depID") Long depId){
         try {
             departmentService.getDepartmentById(depId);
             departmentService.deleteDepartment(depId);
@@ -66,13 +63,6 @@ public class Departments {
     }
     @RequestMapping(value = "/depSave", method=RequestMethod.POST)
     public String depSave(Department department, Model model){
-
-        /*Department department = new Department();
-        Long ldepID = FormatUtils.getLongFromStr(depID);*/
-//        department.setName(depName);
-       /* if (department.getId() != null) {
-            department.setId(ldepID);
-        }*/
         try {
             departmentService.saveOrUpdateDepartment(department);
             model.addAttribute("department",department);
@@ -80,7 +70,6 @@ public class Departments {
         } catch (SQLException e) {
             return "sqlException";
         } catch (ValidateExp exp) {
-           //model.addAttribute("depId",depID);
            model.addAttribute("errorMap",exp.getErrorMap());
            return "editDep";
         }

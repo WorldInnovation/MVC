@@ -12,10 +12,8 @@
 
 <body>
 
-<%--<span class="my-text"> ${errorMap}  </span> --%>
-
-<form action="EmpEdit" method="get">
-    <input type="hidden" name="DepID" value="${depID}" >
+<form action="/addEmployee" method="get">
+    <input type="hidden" name="depID" value="${depID}" >
     <input type="submit" value="New Employee">
 </form>
 

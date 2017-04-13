@@ -36,18 +36,17 @@ public class EmpHibernateDAOImpl implements EmployeeDAO<Employee> {
     }
 
     @Override
-    public List<Employee> getAll(String strId) throws SQLException {
-       Long depID = Long.valueOf(strId);
+    public List<Employee> getAll(Long depID) throws SQLException {
+
         Session session = sessionFactory.getCurrentSession();
-        List<Employee> employees = (List<Employee>) session.createQuery(GET_EMP).setParameter("depID", depID).list();
-        return employees;
+        return (List<Employee>) session.createQuery(GET_EMP).setParameter("depID", depID).list();
     }
 
     @Override
-    public Employee getEmpByID(String strID) throws SQLException {
-        Long lEmpID = Long.valueOf(strID);
+    public Employee getEmpByID(Long depID) throws SQLException {
+        Long lEmpID = Long.valueOf(depID);
         Session session = sessionFactory.getCurrentSession();
-        return (Employee) session.get(Employee.class, lEmpID);
+        return  session.get(Employee.class, lEmpID);
 
     }
 }
