@@ -18,7 +18,7 @@
 </form>
 
 <form action="/" method="get">
-    <input type="hidden" name="DepID" value="${depID}" >
+    <input type="hidden" name="depID" value="${depID}" >
     <input type="submit" value="Departments">
 </form>
 
@@ -51,24 +51,24 @@
         <td>${emp.birthday}</td>
         <td>${emp.eMail}</td>
 
-        <td><form action="EmpEdit" method="get">
+        <td><form action="employeeEdit" method="get">
 
-            <input type="hidden" name="EmpID" value="${emp.id}" >
-            <input type="hidden" name="FirstName" value="${emp.firstName}" >
-            <input type="hidden" name="SecondName" value="${emp.secondName}" >
-            <input type="hidden" name="Grade" value="${emp.grade}" >
-            <input type="hidden" name="Birthday" value="${emp.birthday}" >
-            <input type="hidden" name="EMail" value="${emp.eMail}" >
+            <input type="hidden" name="empID" value="${emp.id}" >
+            <input type="hidden" name="firstName" value="${emp.firstName}" >
+            <input type="hidden" name="secondName" value="${emp.secondName}" >
+            <input type="hidden" name="grade" value="${emp.grade}" >
+            <input type="hidden" name="birthday" value="${emp.birthday}" >
+            <input type="hidden" name="eMail" value="${emp.eMail}" >
 
-            <input type="hidden" name="DepID" value="${depID}" >
+            <input type="hidden" name="depID" value="${depID}" >
 
             <input type="submit" value="Edit">
         </form> </td>
 
-        <td> <form action="EmpDelete" method="post">
-            <input type="hidden" name="EmpID" value="${emp.id}" >
+        <td> <form action="empDelete" method="post">
+            <input type="hidden" name="empID" value="${emp.id}" >
 
-            <input type="hidden" name="DepID" value="${depID}" >
+            <input type="hidden" name="depID" value="${depID}" >
 
             <input type="submit" value="Delete">  </form> </td>
 

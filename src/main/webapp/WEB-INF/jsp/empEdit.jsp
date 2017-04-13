@@ -24,11 +24,10 @@
     Employee
 </div>
 
-<form action="EmpSave" method="post">
-    <input type="hidden" name="EmpID" value="${empID}"/>
-    <input type="hidden" name="DepID" value="${depID}"/>
-    <input type="hidden" name="employee"  value="${employee}" />
-
+<form action="empSave" method="post">
+    <input type="hidden" name="ID" value="${empID}"/>
+    <input type="hidden" name="depID" value="${depID}"/>
+<%--    <input type="hidden" name="employee"  value="${employee}" />--%>
 
     <table >
         <caption>
@@ -46,7 +45,7 @@
             </td>
             <td>
                 <label>
-                    <input type="text" name="FirstName" pattern="[A-Za-z]{3,}" value="<c:out value="${param['FirstName'] eq null ? employee.firstName : param['FirstName']}"/>"/>
+                    <input type="text" name="firstName" pattern="[A-Za-z]{3,}" value="<c:out value="${param['firstName'] eq null ? employee.firstName : param['firstName']}"/>"/>
                 </label>
             </td>
         </tr>
@@ -60,7 +59,7 @@
             </td>
             <td>
                 <label>
-                    <input type="text" name="SecondName" pattern="[A-Za-z]{3,}"value="<c:out value="${param['SecondName'] eq null ? employee.secondName : param['SecondName']}"/>"/>
+                    <input type="text" name="secondName" pattern="[A-Za-z]{3,}"value="<c:out value="${param['secondName'] eq null ? employee.secondName : param['secondName']}"/>"/>
                 </label>
             </td>
         </tr>
@@ -74,7 +73,7 @@
             </td>
             <td>
                 <label>
-                    <input type="text" name="Grade" value="<c:out value="${param['Grade'] eq null ? employee.grade : param['Grade']}"/>"/>
+                    <input type="text" name="grade" value="<c:out value="${param['grade'] eq null ? employee.grade : param['grade']}"/>"/>
                 </label>
             </td>
         </tr>
@@ -88,8 +87,7 @@
             </td>
             <td>
                 <label>
-                    <p><input type="text" id="datepicker" name="Birthday" placeholder="${param['Birthday'] eq null ? employee.birthday : param['Birthday']}"
-                              value="${param['Birthday'] eq null ? employee.birthday : param['Birthday']}">
+                    <p><input type="text" id="datepicker" name="birthday" value="${param['birthday'] eq null ? employee.birthday : param['birthday']}">
                     </p>
                 </label>
 
@@ -105,7 +103,7 @@
             </td>
             <td>
                 <label>
-                    <input type="text" name="EMail"  pattern="([A-z0-9_.-]{3,})@([A-z0-9_.-]{1,}).([A-z]{2,8})" value="<c:out value="${param['EMail'] eq null ? employee.eMail : param['EMail']}"/>"/>
+                    <input type="text" name="eMail"  <%--pattern="([A-z0-9_.-]{3,})@([A-z0-9_.-]{1,}).([A-z]{2,8})"--%> value="<c:out value="${param['eMail'] eq null ? employee.eMail : param['eMail']}"/>"/>
                 </label>
 
             </td>
