@@ -1,8 +1,10 @@
 package com.aimprosoft.service.impl;
 
 
+import com.aimprosoft.dao.DepartmentDAO;
 import com.aimprosoft.dao.EmployeeDAO;
 import com.aimprosoft.exeption.ValidateExp;
+import com.aimprosoft.model.Department;
 import com.aimprosoft.model.Employee;
 import com.aimprosoft.service.EmployeeService;
 import com.aimprosoft.util.CustomValidator;
@@ -21,12 +23,16 @@ public class EmployServiceImpl implements EmployeeService {
     @Qualifier("employeeDAO")
     private EmployeeDAO employeeDAO;
     @Autowired
+    private DepartmentDAO departmentDAO;
+    @Autowired
     @Qualifier("customValidator")
     private CustomValidator validator;
 
     @Transactional
     @Override
-    public void updateEmployee(Employee employee) throws ValidateExp, SQLException {
+    public void updateEmployee(Employee employee, Long depId) throws ValidateExp, SQLException {
+        Department department = departmentDAO.getByID(depId);
+        employee.setDepartment(department);
         validator.validate(employee);
         employeeDAO.update(employee);
     }
@@ -40,9 +46,9 @@ public class EmployServiceImpl implements EmployeeService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Employee> listEmployee(Long empId) throws SQLException {
-
-        return employeeDAO.getAll(empId);
+    public List<Employee> listEmployee(Long depId) throws SQLException {
+        Department department = departmentDAO.getByID(depId);
+        return employeeDAO.getAll(department);
     }
 
     @Transactional(readOnly = true)

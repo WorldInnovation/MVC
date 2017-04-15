@@ -14,8 +14,8 @@ import java.util.List;
 @Table(name = "Department")
 public class Department implements Serializable {
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name")
@@ -25,11 +25,15 @@ public class Department implements Serializable {
     @CheckWith(value = OvalValidDepName.class, message = " name exist")
     private String name;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)//, fetch = FetchType.LAZY
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     public List<Employee> getEmployees() {
         return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     public Long getId() {
@@ -41,7 +45,7 @@ public class Department implements Serializable {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {

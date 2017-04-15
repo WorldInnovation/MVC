@@ -25,7 +25,7 @@
 </div>
 
 <form action="empSave" method="post">
-    <input type="hidden" name="ID" value="${empID}"/>
+    <input type="hidden" name="id" value="${empID}"/>
     <input type="hidden" name="depID" value="${depID}"/>
 <%--    <input type="hidden" name="employee"  value="${employee}" />--%>
 

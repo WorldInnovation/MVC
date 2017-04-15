@@ -2,6 +2,7 @@
 package com.aimprosoft.dao.impl;
 
 import com.aimprosoft.dao.EmployeeDAO;
+import com.aimprosoft.model.Department;
 import com.aimprosoft.model.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,7 +15,7 @@ import java.util.List;
 @Repository("employeeDAO")
 public class EmpHibernateDAOImpl implements EmployeeDAO<Employee> {
 
-    private static  final String GET_EMP = "from Employee e where e.depId=:depID";
+    private static  final String GET_EMP = "from Employee e where e.department=:dep";
 
     private final SessionFactory sessionFactory;
 
@@ -32,14 +33,14 @@ public class EmpHibernateDAOImpl implements EmployeeDAO<Employee> {
     @Override
     public void update(Employee employee) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-            session.saveOrUpdate(employee);
+            session.save(employee);
     }
 
     @Override
-    public List<Employee> getAll(Long depID) throws SQLException {
+    public List<Employee> getAll(Department department) throws SQLException {
 
         Session session = sessionFactory.getCurrentSession();
-        return (List<Employee>) session.createQuery(GET_EMP).setParameter("depID", depID).list();
+        return (List<Employee>) session.createQuery(GET_EMP).setParameter("dep", department).list();
     }
 
     @Override
