@@ -47,7 +47,7 @@ public class Employees extends ExceptionHandlingController{
     @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
     public String addDepartment(@RequestParam("depID") Long depID, Model model) {
         model.addAttribute("depID", depID);
-        model.addAttribute("empID", "null");
+        //model.addAttribute("empID", "null");
 
         return "empEdit";
     }

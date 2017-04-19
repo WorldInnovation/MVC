@@ -26,6 +26,12 @@ public class ExceptionHandlingController {
         return "sqlException";
     }
 
+    @ExceptionHandler({Exception.class})
+    public String serverError(Exception e) {
+
+        return "exception";
+    }
+
 /*    // Total control - setup a model and return the view name yourself. Or
     // consider subclassing ExceptionHandlerExceptionResolver (see below).
     @ExceptionHandler(Exception.class)
