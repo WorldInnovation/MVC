@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    void updateEmployee (Employee employee) throws ValidateExp, SQLException;
+    void updateEmployee (Employee employee, Long depId) throws ValidateExp, SQLException;
     void deleteEmployee (Employee employee) throws  SQLException;
-    List<Employee> listEmployee (Long empId) throws SQLException;
+    List<Employee> listEmployee (Long depId) throws SQLException;
     Employee getEmpByID (Long empId)   throws SQLException;
 
 }

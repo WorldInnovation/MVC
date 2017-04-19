@@ -1,5 +1,6 @@
 package com.aimprosoft.dao;
 
+import com.aimprosoft.model.Department;
 import com.aimprosoft.model.Employee;
 
 import java.sql.SQLException;
@@ -9,6 +10,6 @@ public interface EmployeeDAO<T> {
 
     void delete (T entity) throws  SQLException;
     void update ( T entity) throws SQLException;
-    List<T> getAll(Long depID) throws SQLException;
+    List<T> getAll(Department department) throws SQLException;
     Employee getEmpByID (Long id) throws SQLException;
 }

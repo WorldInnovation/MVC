@@ -8,11 +8,11 @@
     <context:property-placeholder location="classpath:database.properties"/>
     <context:annotation-config/>
     <context:component-scan
-            base-package="com.aimprosoft.service,com.aimprosoft.dao,com.aimprosoft.util"/>
+            base-package="com.aimprosoft.service,com.aimprosoft.dao,com.aimprosoft.util,com.aimprosoft.model"/>
 
     <bean class="net.sf.oval.integration.spring.SpringInjector"/>
 
-    <bean name="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.user}"/>
@@ -30,8 +30,8 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <!--<prop key="hibernate.show_sql">true</prop>-->
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <!--<prop key="hibernate.connection.pool_size">100</prop>-->
             </props>
         </property>
