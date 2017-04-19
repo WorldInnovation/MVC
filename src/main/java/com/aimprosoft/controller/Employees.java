@@ -73,9 +73,7 @@ public class Employees extends ExceptionHandlingController{
             employeeService.updateEmployee(employee, depId);
         } catch (ValidateExp exp) {
             Long empId = employee.getId();
-            if (0 < empId) {
-                empId = employee.getId();
-            }
+
             model.addAttribute("depID", depId);
             model.addAttribute("empID", empId);
             model.addAttribute("errorMap", exp.getErrorMap());
