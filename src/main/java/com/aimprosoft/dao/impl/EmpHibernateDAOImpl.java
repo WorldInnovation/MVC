@@ -38,7 +38,7 @@ public class EmpHibernateDAOImpl implements EmployeeDAO<Employee> {
     public void update(Employee employee) throws DaoExp {
         Session session = sessionFactory.getCurrentSession();
         try {
-            session.save(employee);
+            session.saveOrUpdate(employee);
         } catch (Exception e) {
             throw new DaoExp(e.getMessage());
         }
