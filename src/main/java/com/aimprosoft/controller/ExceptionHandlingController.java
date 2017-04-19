@@ -12,7 +12,6 @@ import java.sql.SQLException;
 @Controller
 public class ExceptionHandlingController {
 
-
     @ResponseStatus(value = HttpStatus.CONFLICT,
             reason = "Data integrity violation")  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
@@ -26,16 +25,10 @@ public class ExceptionHandlingController {
         return "sqlException";
     }
 
-/*    // Total control - setup a model and return the view name yourself. Or
-    // consider subclassing ExceptionHandlerExceptionResolver (see below).
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
-        logger.error("Request: " + req.getRequestURL() + " raised " + ex);
+    @ExceptionHandler({Exception.class})
+    public String exception(Exception e) {
 
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", ex);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName("error");
-        return mav;
-    }*/
+        return "sqlException";
+    }
+
 }
