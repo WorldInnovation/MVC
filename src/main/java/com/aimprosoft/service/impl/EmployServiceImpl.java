@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
+import com.aimprosoft.exeption.DaoExp;
 import java.util.List;
 
 @Service("employServiceImpl")
@@ -30,7 +30,7 @@ public class EmployServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void updateEmployee(Employee employee, Long depId) throws ValidateExp, SQLException {
+    public void updateEmployee(Employee employee, Long depId) throws ValidateExp, DaoExp {
         Department department = departmentDAO.getByID(depId);
         employee.setDepartment(department);
         validator.validate(employee);
@@ -39,21 +39,21 @@ public class EmployServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void deleteEmployee(Employee employee) throws SQLException {
+    public void deleteEmployee(Employee employee) throws DaoExp {
 
         employeeDAO.delete(employee);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Employee> listEmployee(Long depId) throws SQLException {
+    public List<Employee> listEmployee(Long depId) throws DaoExp {
         Department department = departmentDAO.getByID(depId);
         return employeeDAO.getAll(department);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Employee getEmpByID(Long empID) throws SQLException {
+    public Employee getEmpByID(Long empID) throws DaoExp {
         return employeeDAO.getEmpByID(empID);
     }
 }

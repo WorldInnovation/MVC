@@ -44,8 +44,6 @@ public class Employee implements Serializable {
     @Email(message = "set@rightMail.format")
     private String eMail;
 
-
-
     @ManyToOne
     @JoinColumn(name = "depID", nullable = false)
     private Department department;
