@@ -1,5 +1,6 @@
 package com.aimprosoft.controller;
 
+import com.aimprosoft.exeption.DaoExp;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class ExceptionHandlingController {
 
     }
 
-    @ExceptionHandler({SQLException.class, DataAccessException.class})
+    @ExceptionHandler({DaoExp.class})
     public String databaseError() {
 
         return "sqlException";

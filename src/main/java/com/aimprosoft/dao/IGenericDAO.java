@@ -1,10 +1,11 @@
 package com.aimprosoft.dao;
 
 
-import java.io.Serializable;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
-public interface IGenericDAO <T extends Serializable> {
+import java.util.List;
+@Repository()
+public interface IGenericDAO <T> {
     List<T> getAll() ;
     void update ( T entity) ;
     void delete (T entity) ;

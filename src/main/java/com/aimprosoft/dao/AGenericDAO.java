@@ -5,23 +5,34 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
     @Repository()
-    public class AGenericDAO < T extends Serializable>{
-        private Class< T > clazz;
+    public class AGenericDAO < T > implements IGenericDAO<T>{
+
+        private Class<T> clazz;
 
         @Autowired
         SessionFactory sessionFactory;
 
-        public void setClazz(Class<T> clazzToSet){
-            this.clazz = clazzToSet;
+/*        public AGenericDAO(Class<T> clazz) {
+  Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        type = (Class) pt.getActualTypeArguments()[0];
+        }*/
+
+
+
+        public void setClazz(Class<T> clazz) {
+            this.clazz = clazz;
         }
-        public T getById( long id ){
+
+        public T getByID(Long id ){
             return (T) getCurrentSession().get( clazz, id );
         }
-        public List< T > findAll(){
+        public List< T > getAll(){
             return getCurrentSession().createQuery( "from " + clazz.getName() ).list();
         }
         public T getByName(String name)  {
@@ -33,8 +44,8 @@ import java.util.List;
         public void delete( T entity ){
             getCurrentSession().delete( entity);
         }
-        public void deleteById( long entityId ) {
-            T entity = getById( entityId );
+        public void deleteByID( Long entityId ) {
+            T entity = getByID( entityId );
             delete( entity );
         }
 
