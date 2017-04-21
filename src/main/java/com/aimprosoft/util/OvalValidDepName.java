@@ -18,14 +18,14 @@ public class OvalValidDepName implements CheckWithCheck.SimpleCheck {
         String depName = o1.toString();
         Department dep = (Department) o;
 
-        Department department = new Department();
-        department.setName(depName);
         try {
-            department = departmentDAO.existNameInDB(depName);
+            Department department = departmentDAO.getByName(depName);
+            return (department == null || department.getId().equals(dep.getId()));
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return (department == null || department.getId().equals(dep.getId()));
+
 
     }
 }

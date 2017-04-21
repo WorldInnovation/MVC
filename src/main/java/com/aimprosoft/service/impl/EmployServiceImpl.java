@@ -20,7 +20,6 @@ import java.util.List;
 public class EmployServiceImpl implements EmployeeService {
 
     @Autowired
-    @Qualifier("employeeDAO")
     private EmployeeDAO employeeDAO;
     @Autowired
     private DepartmentDAO departmentDAO;
@@ -48,12 +47,12 @@ public class EmployServiceImpl implements EmployeeService {
     @Override
     public List<Employee> listEmployee(Long depId) throws DaoExp {
         Department department = departmentDAO.getByID(depId);
-        return employeeDAO.getAll(department);
+        return employeeDAO.getAllByDepartment(department);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Employee getEmpByID(Long empID) throws DaoExp {
-        return employeeDAO.getEmpByID(empID);
+        return employeeDAO.getByID(empID);
     }
 }
