@@ -3,6 +3,7 @@ package com.aimprosoft.service.impl;
 
 import com.aimprosoft.dao.DepartmentDAO;
 import com.aimprosoft.dao.EmployeeDAO;
+import com.aimprosoft.exeption.DaoExp;
 import com.aimprosoft.exeption.ValidateExp;
 import com.aimprosoft.model.Department;
 import com.aimprosoft.model.Employee;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aimprosoft.exeption.DaoExp;
 import java.util.List;
 
 @Service("employServiceImpl")

@@ -19,7 +19,7 @@ public class Departments extends ExceptionHandlingController {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/DepartmentsList"}, method = RequestMethod.GET)
     public String getUsers(Model model) throws DaoExp {
         List<Department> departments;
         departments = departmentService.getAll();
@@ -44,9 +44,9 @@ public class Departments extends ExceptionHandlingController {
 
     @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
     public String depDelete(@RequestParam("depID") Long depId) throws DaoExp {
-            Department department = departmentService.getDepartmentById(depId);
-            departmentService.deleteDepartment(depId);
-            return "redirect:/";
+        Department department = departmentService.getDepartmentById(depId);
+        departmentService.deleteDepartment(depId);
+        return "redirect:/";
 
     }
 

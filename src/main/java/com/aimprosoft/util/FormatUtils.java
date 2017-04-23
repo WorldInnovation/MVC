@@ -1,9 +1,6 @@
 package com.aimprosoft.util;
 
 
-
-
-
 import com.mysql.jdbc.StringUtils;
 
 import java.text.ParseException;
