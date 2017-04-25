@@ -3,6 +3,7 @@ package com.aimprosoft.service.impl;
 
 import com.aimprosoft.dao.DepartmentDAO;
 import com.aimprosoft.dao.EmployeeDAO;
+import com.aimprosoft.exeption.DaoExp;
 import com.aimprosoft.exeption.ValidateExp;
 import com.aimprosoft.model.Department;
 import com.aimprosoft.model.Employee;
@@ -13,14 +14,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aimprosoft.exeption.DaoExp;
 import java.util.List;
 
 @Service("employServiceImpl")
 public class EmployServiceImpl implements EmployeeService {
 
     @Autowired
-    @Qualifier("employeeDAO")
     private EmployeeDAO employeeDAO;
     @Autowired
     private DepartmentDAO departmentDAO;
@@ -48,12 +47,12 @@ public class EmployServiceImpl implements EmployeeService {
     @Override
     public List<Employee> listEmployee(Long depId) throws DaoExp {
         Department department = departmentDAO.getByID(depId);
-        return employeeDAO.getAll(department);
+        return employeeDAO.getAllByDepartment(department);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Employee getEmpByID(Long empID) throws DaoExp {
-        return employeeDAO.getEmpByID(empID);
+        return employeeDAO.getByID(empID);
     }
 }

@@ -1,16 +1,13 @@
 package com.aimprosoft.service.impl;
 
 
-import com.aimprosoft.dao.AGenericDAO;
 import com.aimprosoft.dao.DepartmentDAO;
-import com.aimprosoft.dao.IGenericDAO;
 import com.aimprosoft.exeption.DaoExp;
 import com.aimprosoft.exeption.ValidateExp;
 import com.aimprosoft.model.Department;
 import com.aimprosoft.service.DepartmentService;
 import com.aimprosoft.util.CustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +18,9 @@ import java.util.List;
 @Service("departmentService")
 public class DepartmentServiceImpl implements DepartmentService {
 
-    @Qualifier("AGenericDAO")
     @Autowired
-    //private DepartmentDAO departmentDAO;
-    private IGenericDAO<Department> departmentDAO;
+    private DepartmentDAO departmentDAO;
+    //private AGenericDAO <Department> departmentDAO;
 
     @Autowired
     private CustomValidator validator;
