@@ -47,7 +47,6 @@ public class Departments extends ExceptionHandlingController {
             Department department = departmentService.getDepartmentById(depId);
             departmentService.deleteDepartment(depId);
             return "redirect:/";
-
     }
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
