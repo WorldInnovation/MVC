@@ -12,8 +12,11 @@
     <span class="titleTable"> Departments hi</span>
 </div>
 
-<form action="addDepartment" method="get">
-    <input type="submit" value="New Department"></form>
+<form action="editDepartment" method="get">
+    <input type="submit" value="New Department">
+    <input type="hidden" name="depID" value="${null}">
+</form>
+
 <table>
     <caption>
         <span class="titleTable">Departments </span>

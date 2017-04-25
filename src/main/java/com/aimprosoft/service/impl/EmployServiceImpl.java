@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("employServiceImpl")
+@Service()
 public class EmployServiceImpl implements EmployeeService {
 
     @Autowired
@@ -24,10 +24,9 @@ public class EmployServiceImpl implements EmployeeService {
     @Autowired
     private DepartmentDAO departmentDAO;
     @Autowired
-    @Qualifier("customValidator")
     private CustomValidator validator;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateEmployee(Employee employee, Long depId) throws ValidateExp, DaoExp {
         Department department = departmentDAO.getByID(depId);
@@ -36,7 +35,7 @@ public class EmployServiceImpl implements EmployeeService {
         employeeDAO.update(employee);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteEmployee(Employee employee) throws DaoExp {
 

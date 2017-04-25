@@ -14,25 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@EnableTransactionManagement
-@Service("departmentService")
+@Service()
 public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentDAO departmentDAO;
-    //private AGenericDAO <Department> departmentDAO;
 
     @Autowired
     private CustomValidator validator;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveOrUpdateDepartment(Department department) throws ValidateExp, DaoExp {
           validator.validate(department);
           departmentDAO.update(department);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteDepartment(Long longId) throws DaoExp {
         Department department = departmentDAO.getByID(longId);

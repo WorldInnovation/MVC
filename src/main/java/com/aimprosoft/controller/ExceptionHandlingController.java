@@ -15,14 +15,6 @@ import java.sql.SQLException;
 @Controller
 public class ExceptionHandlingController {
 
-    @ResponseStatus(value = HttpStatus.CONFLICT,
-            reason = "Data integrity violation")  // 409
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public String dataIntegrity(Model model) {
-        model.addAttribute("sqlError","Data integrity violation");
-        return "sqlException";
-    }
-
     @ExceptionHandler({DaoExp.class})
     public String databaseError(Exception e, Model model) {
         model.addAttribute("sqlError",e);
@@ -34,5 +26,12 @@ public class ExceptionHandlingController {
         model.addAttribute("error", e);
         return "exception";
     }
-
 }
+/*
+    @ResponseStatus(value = HttpStatus.CONFLICT,
+            reason = "Data integrity violation")  // 409
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public String dataIntegrity(Model model) {
+        model.addAttribute("sqlError","Data integrity violation");
+        return "sqlException";
+    }*/

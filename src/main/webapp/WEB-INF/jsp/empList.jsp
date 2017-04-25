@@ -12,8 +12,9 @@
 
 <body>
 
-<form action="/addEmployee" method="get">
+<form action="employeeEdit" method="get">
     <input type="hidden" name="depID" value="${depID}" >
+    <input type="hidden" name="empID" value="${null}" >
     <input type="submit" value="New Employee">
 </form>
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class Departments extends ExceptionHandlingController {
+public class DepartmentsController extends ExceptionHandlingController {
     @Autowired
     private DepartmentService departmentService;
 
@@ -29,24 +29,18 @@ public class Departments extends ExceptionHandlingController {
 
     @RequestMapping(value = "/editDepartment", method = RequestMethod.GET)
     public String editDepartment(@RequestParam(required = false) Long depID, Model model) throws DaoExp {
-        Department department;
-        department = departmentService.getDepartmentById(depID);
+        Department department = null;
+        if (depID != null) department = departmentService.getDepartmentById(depID);
         model.addAttribute("department", department);
         model.addAttribute("depId", depID);
         return "editDep";
     }
 
-    @RequestMapping(value = "/addDepartment", method = RequestMethod.GET)
-    public String addDepartment(Model model) {
-        model.addAttribute("depID", null);
-        return "editDep";
-    }
-
     @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
     public String depDelete(@RequestParam("depID") Long depId) throws DaoExp {
-            Department department = departmentService.getDepartmentById(depId);
-            departmentService.deleteDepartment(depId);
-            return "redirect:/";
+        Department department = departmentService.getDepartmentById(depId);
+        departmentService.deleteDepartment(depId);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)

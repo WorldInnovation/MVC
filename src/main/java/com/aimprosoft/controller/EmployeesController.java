@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
-public class Employees extends ExceptionHandlingController{
+public class EmployeesController extends ExceptionHandlingController {
     @Autowired
     private EmployeeService employeeService;
 
@@ -33,35 +33,29 @@ public class Employees extends ExceptionHandlingController{
     public String getEmployees(@RequestParam("depID") Long depID, Model model) throws DaoExp {
         model.addAttribute("depID", depID);
         if (0 != depID) {
-                List<Employee> employees = employeeService.listEmployee(depID);
-                model.addAttribute("employees", employees);
+            List<Employee> employees = employeeService.listEmployee(depID);
+            model.addAttribute("employees", employees);
         }
         return "empList";
-    }
-
-    @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
-    public String addDepartment(@RequestParam("depID") Long depID, Model model) {
-        model.addAttribute("depID", depID);
-        return "empEdit";
     }
 
     @RequestMapping(value = "/employeeEdit", method = RequestMethod.GET)
     public String employeeEdit(@RequestParam("depID") Long depID, @RequestParam("empID") Long empID, Model model) throws DaoExp {
         model.addAttribute("depID", depID);
-            if (0 != empID) {
-                Employee employee = employeeService.getEmpByID(empID);
-                model.addAttribute("empID", employee.getId());
-                model.addAttribute("employee", employee);
-            }
+        if (null != empID) {
+            Employee employee = employeeService.getEmpByID(empID);
+            model.addAttribute("empID", employee.getId());
+            model.addAttribute("employee", employee);
+        }
         return "empEdit";
     }
 
     @RequestMapping(value = "/empDelete", method = RequestMethod.POST)
     public String empDelete(@RequestParam("depID") Long depID, @RequestParam("empID") Long empID) throws DaoExp {
-            if (null != empID) {
-                Employee employee = employeeService.getEmpByID(empID);
-                employeeService.deleteEmployee(employee);
-            }
+        if (null != empID) {
+            Employee employee = employeeService.getEmpByID(empID);
+            employeeService.deleteEmployee(employee);
+        }
         String sendParam = "?depID=".concat(String.valueOf(depID));
         return "redirect:/employeesList".concat(sendParam);
     }
