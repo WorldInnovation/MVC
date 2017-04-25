@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -16,20 +17,21 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.CONFLICT,
             reason = "Data integrity violation")  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public void conflict() {
-
+    public String dataIntegrity(Model model) {
+        model.addAttribute("sqlError","Data integrity violation");
+        return "sqlException";
     }
 
     @ExceptionHandler({DaoExp.class})
-    public String databaseError() {
-
+    public String databaseError(Exception e, Model model) {
+        model.addAttribute("sqlError",e);
         return "sqlException";
     }
 
     @ExceptionHandler({Exception.class})
-    public String exception(Exception e) {
-
-        return "sqlException";
+    public String exception(Exception e, Model model) {
+        model.addAttribute("error", e);
+        return "exception";
     }
 
 }
